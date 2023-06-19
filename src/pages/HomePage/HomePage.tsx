@@ -6,7 +6,6 @@ import News from "./components/News";
 import Opportunities from "./components/Opportunities";
 
 const HomePage = () => {
-  const video = require("../../assest/Video/talent.mp4").default;
   return (
     <Layout>
       <Card>
@@ -16,7 +15,6 @@ const HomePage = () => {
           entertainment? If so, you’ve come to the right place. Watch this video
           and sign up to apply for opportunities."
           btnTitle="Join as TALENT"
-          videoFile={video}
           left={true}
         />
       </Card>
@@ -25,7 +23,6 @@ const HomePage = () => {
           text="Are you hiring for a project?"
           subText="Are you looking for talented actors, singers, dancers, writers, and camera crew for your next project? Casting Arabia can help you. Watch this video and click below to register and post your next opportunity."
           btnTitle="Join as SEEKER"
-          videoFile={video}
           left={false}
         />
       </Card>
