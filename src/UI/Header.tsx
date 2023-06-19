@@ -34,6 +34,11 @@ function Header() {
     navigate("/login");
   };
 
+  const link = useNavigate();
+  const goToHome = () => {
+    link("/");
+  };
+
   return (
     <AppBar position="static" sx={{ backgroundColor: "white" }}>
       <Container
@@ -53,8 +58,8 @@ function Header() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href=""
+            component="button"
+            onClick={() => goToHome()}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -62,6 +67,7 @@ function Header() {
               letterSpacing: ".3rem",
               color: "white",
               textDecoration: "none",
+              cursor: "pointer",
             }}
           >
             <img
@@ -73,8 +79,8 @@ function Header() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href=""
+            component="button"
+            onClick={() => goToHome()}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
