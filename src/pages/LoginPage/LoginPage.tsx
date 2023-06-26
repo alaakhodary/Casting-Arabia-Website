@@ -9,6 +9,15 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 import Layout from "../../components/Layout";
 
+import { AxiosResponse } from "axios";
+import { useMutation } from "react-query";
+
+import useAuth from "../../hooks/useAuth";
+
+import { api, setAccessToken } from "../../axiosConfig";
+
+// import { API_URL } from "../../config/api";
+
 interface ILoginFormValues {
   email: string;
   password: string;
@@ -19,6 +28,8 @@ const regularExpression =
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const { login } = useAuth();
 
   const initialValues: ILoginFormValues = {
     email: "",
@@ -33,6 +44,21 @@ const LoginPage = () => {
       .required("Password is required"),
   });
 
+  const handleLogin = async (values: ILoginFormValues) => {
+    const response = await api.post("auth/login", values);
+    const { accessToken } = response.data;
+    setAccessToken(accessToken);
+    login(accessToken);
+    return response;
+  };
+
+  const { mutate } = useMutation({
+    mutationFn: handleLogin,
+    onSuccess: (data: AxiosResponse<any, any>) => {
+      console.log(data);
+    },
+  });
+
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -40,8 +66,8 @@ const LoginPage = () => {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: (values: ILoginFormValues) => {
+      mutate(values);
     },
   });
 
@@ -72,6 +98,7 @@ const LoginPage = () => {
                 id="password"
                 name="password"
                 label="Password"
+                autoComplete="false"
                 type={showPassword ? "text" : "password"}
                 value={formik.values.password}
                 onChange={formik.handleChange}

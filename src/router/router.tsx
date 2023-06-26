@@ -3,6 +3,10 @@ import { Route, Routes } from "react-router-dom";
 
 import HomePage from "../pages/HomePage/HomePage";
 import LoginPage from "../pages/LoginPage/LoginPage";
+import CreatorPage from "../pages/CreatorPage/CreatorPage";
+import PostingOpportunity from "../pages/PostingOpportunity/PostingOpportunity";
+
+
 
 const Router: React.FC = () => {
   return (
@@ -16,8 +20,13 @@ const Router: React.FC = () => {
       }
     >
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route index element={<HomePage />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/creator" element={<CreatorPage />} />
+        <Route
+          path="/creator/opportunities/:id/edit/step-one"
+          element={<PostingOpportunity />}
+        />
         <Route
           path="/*"
           element={
