@@ -6,8 +6,6 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import CreatorPage from "../pages/CreatorPage/CreatorPage";
 import PostingOpportunity from "../pages/PostingOpportunity/PostingOpportunity";
 
-
-
 const Router: React.FC = () => {
   return (
     <Suspense

@@ -20,7 +20,7 @@ export interface IPropPostValues {
   submissionsStats?: SubmissionsStats;
 }
 
-interface SubmissionsStats {
+export interface SubmissionsStats {
   pending: number;
   accepted: number;
   declined: number;

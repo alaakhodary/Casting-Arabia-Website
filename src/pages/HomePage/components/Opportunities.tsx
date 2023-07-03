@@ -33,7 +33,10 @@ import Button from "../../../components/Button";
 import Loading from "../../../components/Loading";
 import { useNavigate } from "react-router-dom";
 
-import { IPropPostValues } from "../../PostingOpportunity/Interfaces/InterfacesOpportunity";
+import {
+  IPropPostValues,
+  SubmissionsStats,
+} from "../../PostingOpportunity/Interfaces/InterfacesOpportunity";
 
 const Opportunity = () => {
   const { token } = useAuth();
@@ -79,6 +82,14 @@ const Opportunity = () => {
       setActiveIndex((prevIndex) => prevIndex + 1);
     }
   };
+
+  const [submissionsStats] = useState<SubmissionsStats>({
+    pending: 0,
+    accepted: 0,
+    declined: 0,
+    hired: 0,
+    scheduled: 0,
+  });
 
   const navigate = useNavigate();
   const goToPost = () => {
@@ -157,7 +168,7 @@ const Opportunity = () => {
                     alt="OpportunitiesImage"
                     className="mb-2 h-[150px] w-full rounded-t-lg object-cover"
                   />
-                  <div className="flex items-start justify-between">
+                  <div className="mb-12 flex items-start justify-between">
                     <h1 className="px-3 text-base font-semibold text-[#444444]">
                       {item.title}
                     </h1>
@@ -240,6 +251,33 @@ const Opportunity = () => {
                         Delete
                       </MenuItem>
                     </Menu>
+                  </div>
+                  <div className="scrollbar-hidden flex h-auto w-auto scroll-mx-8 items-center gap-2 overflow-auto px-2">
+                    <div className="flex h-auto items-center rounded-2xl border">
+                      <span className="w-max px-3">
+                        Pending ({submissionsStats.pending})
+                      </span>
+                    </div>
+                    <div className="flex h-auto items-center rounded-xl border">
+                      <span className="w-max px-3">
+                        Scheduled ({submissionsStats.scheduled})
+                      </span>
+                    </div>
+                    <div className="flex h-auto items-center rounded-xl border">
+                      <span className="w-max px-3">
+                        Hired ({submissionsStats.hired})
+                      </span>
+                    </div>
+                    <div className="flex h-auto items-center rounded-xl border">
+                      <span className="w-max px-3">
+                        Declined ({submissionsStats.declined})
+                      </span>
+                    </div>
+                    <div className="flex h-auto items-center rounded-xl border">
+                      <span className="w-max px-3">
+                        Accepted ({submissionsStats.accepted})
+                      </span>
+                    </div>
                   </div>
                 </div>
               </SwiperSlide>

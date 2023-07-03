@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState } from "react";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -33,7 +33,7 @@ const validationSchema = Yup.object().shape({
   productionDescription: Yup.string().required("description is required"),
 });
 
-const PostingOpportunity = () => {
+const PostingOpportunity = (props: any) => {
   const [showInput, setShowInput] = useState(false);
   const [showErrorProductionBtn, setShowErrorProductionBtn] = useState(false);
 
@@ -65,14 +65,14 @@ const PostingOpportunity = () => {
     formik.setFieldValue("productionPersonnel", updatedInputFields);
   };
 
-  const handleInputChange = (
+  /* const handleInputChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     id: number
   ) => {
     const updatedInput = [...formik.values.productionPersonnel];
     updatedInput[id] = event.target.value;
     formik.setFieldValue("productionPersonnel", updatedInput);
-  };
+  }; */
 
   const handleContinue = () => {
     if (!showInput) {
@@ -131,7 +131,8 @@ const PostingOpportunity = () => {
                   name={`productionPersonnel.${index}`}
                   multiline
                   value={value}
-                  onChange={(event) => handleInputChange(event, index)}
+                  onChange={formik.handleChange}
+                  // onChange={(event) => handleInputChange(event, index)}
                   placeholder="Production Personnel"
                   style={{
                     backgroundColor: "white",
